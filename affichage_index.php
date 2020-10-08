@@ -1,11 +1,7 @@
 <?php
+$title = 'Mon Blog';
 
-
-
-include 'navbar.php';
-
-
-
+ob_start();
 function paginator(int &$nbPage)
 {
     echo '<nav aria-label="Pagination"><ul class="pagination d-flex justify-content-center">';
@@ -16,10 +12,6 @@ function paginator(int &$nbPage)
 };
 paginator($nbPage);
 
-
-
-
-// while ($donnees = $reponse->fetch()) {
 foreach ($articles as $article) {
 ?>
     <div class="container">
@@ -27,13 +19,15 @@ foreach ($articles as $article) {
             <h1><?= $article['titre'] ?></h1>
             <div class="date">Ecrit le : <?= $article['date_creation'] ?></div>
             <div class="content-box"><?= $article['contenu'] ?></div>
-            <a href="commentaires.php?id=<?= $article['id'] ?>">Commentaires</a>
+            <a href="index.php?action=post&id=<?= $article['id'] ?>">Commentaires</a>
     </div>
     </article>
 <?php
 }
 
-
-
 paginator($nbPage);
+
+$content = ob_get_clean();
+
+require ('template.php');
 ?>

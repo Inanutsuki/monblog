@@ -3,7 +3,7 @@ p {
   padding: 0;
 }
 
-.pagination {
+ul.pagination {
   margin-top: 15px;
 }
 
@@ -33,5 +33,10 @@ p {
 
 .container article {
   margin: 15px;
+}
+
+.container .form_connexion-button {
+  margin: auto;
+  padding: 0;
 }
 /*# sourceMappingURL=styles.css.map */

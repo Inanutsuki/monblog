@@ -1,6 +1,3 @@
-<?php 
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,32 +6,18 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-    <title>Connexion</title>
+    <title><?= $title ?></title>
 </head>
 
 <body>
+    
     <?php
+
     include 'navbar.php';
+
+    echo $content
+
     ?>
-    <div class="container">
-        <form method="POST" action="traitement_connexion.php">
-            <div class="form-row d-flex justify-content-around">
-                <div class="col-4">
-                    <label for="inputPseudo">Votre pseudo :</label>
-                    <input type="text" class="form-control" id="inputPseudo" name="pseudo" required>
-                </div>
-            </div>
-            <div class="form-row d-flex justify-content-around">
-                <div class="col-4">
-                    <label for="inputEmail">Mot de passe :</label>
-                    <input type="password" class="form-control" id="inputPassword" name="password" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary mt-4">Connecte toi !!!</button>
-        </form>
-    </div>
-
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
