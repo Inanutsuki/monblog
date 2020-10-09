@@ -5,8 +5,9 @@ function listPosts()
 {
     $postManager = new PostManager();
     $articles = [];
-    $nbPage = $postManager->getArticles($articles);
-    $posts = $postManager->getArticles($articles);
+    $getPage = (isset($_GET['page']) ? ($_GET['page']) - 1 : 0);
+    $nbPage = $postManager->getArticles($articles, $getPage);
+    $posts = $postManager->getArticles($articles, $getPage);
     require('affichage_index.php');
 }
 
@@ -37,14 +38,10 @@ function connect()
         $connectManager = new ConnectManager();
         $resultat = $connectManager->connexion($pseudo);
         $password = $_POST['password'];
-        $resultPassword = $resultat['mot_de_passe'];
-        $isPasswordCorrect = password_verify($password, $resultat['mot_de_passe']);
-
+        $isPasswordCorrect = $connectManager->passworChecked($pseudo, $password);
         try {
-            if (!$resultat || is_null($resultat)) {
-                throw new Exception('Mauvais identifiant ou mot de passe');
-            } else {
-                if ($isPasswordCorrect) {
+            if ($resultat) {
+                if ($isPasswordCorrect == true) {
                     $_SESSION['id'] = $resultat['id'];
                     $_SESSION['pseudo'] = $resultat['pseudo'];
                     $_SESSION['mail'] = $resultat['mail'];
@@ -53,6 +50,8 @@ function connect()
                 } else {
                     throw new Exception('Mauvais identifiant ou mot de passe');
                 }
+            } else {
+                throw new Exception('Mauvais identifiant ou mot de passe');
             }
         } catch (Exception $err) {
             $errorMsg = $err->getMessage();
@@ -100,8 +99,8 @@ function addComment()
 
 function updateComments()
 {
-    $commentManager = new CommentManager();
     $id_billet = $_GET['id'];
+    $commentManager = new CommentManager();
     $idcomment = $commentManager->getCommentInfos($_GET['thiscomment']);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updatedComment = htmlspecialchars($_POST['upadted_comment']);

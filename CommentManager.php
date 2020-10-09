@@ -13,7 +13,6 @@ class CommentManager extends Manager
     {
         $bdd = $this->dbConnect();
         
-        
         $req = $bdd->prepare('INSERT INTO commentaires( id, id_billet, auteur, commentaire, date_commentaire) VALUES(NULL, :id_billet, :auteur, :commentaire, now())');
         $req->execute(array(
             'id_billet' => $id_billet,

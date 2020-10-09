@@ -27,10 +27,10 @@ ob_start();
             </div>
         </div>
         <?php
-        if (isset($_GET['error_login'])) {
-            echo '<p class="text-center">Mauvais identifiant ou mot de passe.</p>';
-        }
-        ?>
+        // if (isset($_GET['error_login'])) {
+        //     echo '<p class="text-center">Mauvais identifiant ou mot de passe.</p>';
+        // }
+        // ?>
         <div class="form_connexion-button col-4">
             <button type="submit" class="btn btn-primary mt-4" name="form-connexion">Connecte toi !!!</button>
         </div>

@@ -2,15 +2,8 @@
 $title = 'Mon Blog';
 
 ob_start();
-function paginator(int &$nbPage)
-{
-    echo '<nav aria-label="Pagination"><ul class="pagination d-flex justify-content-center">';
-    for ($i = 0; $i < $nbPage; $i++) {
-        echo '<li class="page-item"><a class="page-link" href="index.php?page=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
-    }
-    echo '</ul></nav>';
-};
-paginator($nbPage);
+
+$postManager->paginator($nbPage);
 
 foreach ($articles as $article) {
 ?>
@@ -25,7 +18,7 @@ foreach ($articles as $article) {
 <?php
 }
 
-paginator($nbPage);
+$postManager->paginator($nbPage);
 
 $content = ob_get_clean();
 

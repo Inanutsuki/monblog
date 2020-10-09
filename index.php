@@ -23,15 +23,25 @@ try {
         } elseif ($_GET['action'] == 'inscription') {
             newInscription();
         } else if ($_GET['action'] == 'form-comment') {
+            $id_billet = $_GET['id'];
             $postManager = new PostManager;
-            if (!empty($postManager->getpost($_GET['id']))) {
+            $commentManager = new CommentManager();
+            $post = $postManager->getPost($id_billet);
+            $comments = $commentManager->getComments($id_billet);
+            $errorMsg = "";
+            if (!empty($postManager->getpost($id_billet))) {
                 if (!empty($_POST['auteur_commentaire'])) {
                     if (!empty($_POST['text_commentaire'])) {
                         addComment();
+                    } else {
+                        $errorMsg = 'Vous n\'avez pas rempli le champ commentaire.';
                     }
+                } else {
+                    $errorMsg = 'Vous n\'avez pas renseigné votre nom.';
                 }
+                require 'affichage_commentaire.php';
             }
-        }else if($_GET['action'] == 'updateComment'){
+        } else if ($_GET['action'] == 'updateComment') {
             updateComments();
         }
     } else {
