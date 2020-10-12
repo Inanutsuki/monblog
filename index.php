@@ -7,6 +7,8 @@ require_once 'ConnectManager.php';
 require_once 'PostManager.php';
 require_once 'CommentManager.php';
 require_once 'controller.php';
+
+
 $controller = new Controller();
 try {
     if (isset($_GET['action'])) {

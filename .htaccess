@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule page_([a-z]+)_article_([0-9]+) index.php?action=$1&id=$2
+RewriteRule page_([a-z]+) index.php?action=$1
