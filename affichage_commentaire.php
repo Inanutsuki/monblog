@@ -1,7 +1,5 @@
 <?php
 $title = "Commentaire";
-$id_billet = $_GET['id'];
-ob_start();
 ?>
 <div class="container">
 
@@ -16,16 +14,21 @@ ob_start();
         echo "Désolé petit malin !!!";
     }
     foreach ($comments as $comment) {
-        if (isset($_SESSION['pseudo']) === $comment['auteur']) {
-            echo '<p>' . $comment['commentaire'] . '</p>';
-            echo '<p class="comment">Auteur du commentaire : ' . $comment['auteur'] . ' - Commenté le ' . $comment['date_commentaire'] . ' <a href="index.php?action=updateComment&amp;thiscomment=' . $comment['id'] . '&id=' . $id_billet . '" class="d-inline-block">Modififer</a></p>';
+        if (isset($_SESSION['pseudo'])) {
+            if ($_SESSION['pseudo'] == $comment['auteur']) {
+                echo '<p>' . $comment['commentaire'] . '</p>';
+                echo '<p class="comment">Auteur du commentaire : ' . $comment['auteur'] . ' - Commenté le ' . $comment['date_commentaire'] . ' <a href="index.php?action=updateComment&amp;thiscomment=' . $comment['id'] . '&id=' . $id_billet . '" class="d-inline-block">Modififer</a></p>';
+            } else {
+                echo '<p>' . $comment['commentaire'] . '</p>';
+                echo '<p class="comment">Auteur du commentaire : ' . $comment['auteur'] . ' - Commenté le ' . $comment['date_commentaire'] . ' </p>';
+            }
         } else {
             echo '<p>' . $comment['commentaire'] . '</p>';
             echo '<p class="comment">Auteur du commentaire : ' . $comment['auteur'] . ' - Commenté le ' . $comment['date_commentaire'] . ' </p>';
         }
     }
-
     ?>
+
 </div>
 <form method="post" action="<?php echo 'index.php?action=form-comment&id=' . $id_billet . ''  ?>">
     <div class="form-group col-4">
@@ -47,8 +50,3 @@ ob_start();
         <button type="submit" class="btn btn-primary mt-4" name="form-comment">envoyer</button>
     </div>
 </form>
-
-<?php
-$content = ob_get_clean();
-require('template.php');
-?>

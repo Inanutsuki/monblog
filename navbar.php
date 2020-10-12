@@ -19,5 +19,5 @@
             </li>
         </ul>
     </div>
-    <p>Bonjour <?php echo $pseudo=(empty($_SESSION['pseudo'])) ? '' : $_SESSION['pseudo'];?></p>
+    <p>Bonjour <?php echo $pseudo = (empty($_SESSION['pseudo'])) ? '' : $_SESSION['pseudo']; ?></p>
 </nav>

@@ -1,11 +1,9 @@
 <?php
 $title = 'Mon Blog';
 
-ob_start();
-
 $postManager->paginator($nbPage);
 
-foreach ($articles as $article) {
+foreach ($data['articles'] as $article) {
 ?>
     <div class="container">
         <article>
@@ -19,8 +17,4 @@ foreach ($articles as $article) {
 }
 
 $postManager->paginator($nbPage);
-
-$content = ob_get_clean();
-
-require ('template.php');
 ?>

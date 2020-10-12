@@ -1,7 +1,6 @@
 <?php
 
 $title = "Inscription";
-ob_start();
 
 ?>
 <div class="container">
@@ -40,8 +39,3 @@ ob_start();
         <button type="submit" class="btn btn-primary mt-4" name="form-inscription">envoyer</button>
     </form>
 </div>
-
-<?php
-$content = ob_get_clean();
-require ('template.php');
-?>

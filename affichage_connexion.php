@@ -1,7 +1,6 @@
 <?php
-
 $title = "Connexion";
-ob_start();
+// ob_start();
 ?>
 <div class="container ">
     <form method="POST" action="">
@@ -37,6 +36,6 @@ ob_start();
     </form>
 </div>
 <?php 
-    $content = ob_get_clean();
-    require ('template.php');
+    // $content = ob_get_clean();
+    // require ('template.php');
 ?>

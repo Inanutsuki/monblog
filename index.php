@@ -1,27 +1,28 @@
 <?php
 session_start();
 
+require_once 'ControllerManager.php';
 require_once 'InscriptionManager.php';
 require_once 'ConnectManager.php';
 require_once 'PostManager.php';
 require_once 'CommentManager.php';
-require 'controller.php';
-
+require_once 'controller.php';
+$controller = new Controller();
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            listposts();
+            $controller->listposts();
         } elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
+                $controller->post();
             } else {
                 require('affichage_error.php');
                 throw new Exception('aucun identifiant de billet envoyé.');
             }
         } elseif ($_GET['action'] == 'connexion') {
-            connect();
+            $controller->connect();
         } elseif ($_GET['action'] == 'inscription') {
-            newInscription();
+            $controller->newInscription();
         } else if ($_GET['action'] == 'form-comment') {
             $id_billet = $_GET['id'];
             $postManager = new PostManager;
@@ -32,7 +33,7 @@ try {
             if (!empty($postManager->getpost($id_billet))) {
                 if (!empty($_POST['auteur_commentaire'])) {
                     if (!empty($_POST['text_commentaire'])) {
-                        addComment();
+                        $controller->addComment();
                     } else {
                         $errorMsg = 'Vous n\'avez pas rempli le champ commentaire.';
                     }
@@ -42,10 +43,10 @@ try {
                 require 'affichage_commentaire.php';
             }
         } else if ($_GET['action'] == 'updateComment') {
-            updateComments();
+            $controller->updateComments();
         }
     } else {
-        listPosts();
+        $controller->listPosts();
     }
 } catch (Exception $e) {
     echo '<p class="text-center">Erreur : ' . $e->getMessage() . '</p>';

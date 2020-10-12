@@ -19,7 +19,7 @@ class CommentManager extends Manager
             'auteur' => $author,
             'commentaire' => $comment,
         ));
-        header('Location: commentaires.php?id=' . $id_billet . '');
+        header('Location: index.php?action=post&id='.$id_billet.'');
     }
 
     public function getCommentInfos($idComment)
